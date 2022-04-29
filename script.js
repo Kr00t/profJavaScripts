@@ -7,21 +7,36 @@ const goods = [
     { title: 'Shoes', price: 250 },
 ];
 
-const gl = document.querySelector('.goods-list');
 
-const renderGoodsItem = (title, price = 0) => {
-    return `<div class="goods-item">
-                <img src="http://dummyimage.com/120" alt="" srcset="">
-                <h3>${title}</h3>
-                <p>$${price}</p>
-                <button type="button">Добавить</button>
-            </div>`;
-};
 
-const renderGoodsList = (list) => {
-    for (let good of list) {
-        gl.innerHTML += renderGoodsItem(good.title, good.price);
+class GoodsList {
+
+    constructor(goods) {
+        this.goods = goods;
+        this.sum = 0;
+        this.renderGoodsList();
     }
-}
 
-renderGoodsList(goods);
+    renderGoodsItem(title, price = 0) {
+        this.sum += price;
+        return `<div class="goods-item">
+                    <img src="http://dummyimage.com/120" alt="" srcset="">
+                    <h3>${title}</h3>
+                    <p>$${price}</p>
+                    <button type="button">Добавить</button>
+                </div>`;
+    }
+
+    renderGoodsList() {
+        const gl = document.querySelector('.goods-list');
+        for (let good of this.goods) {
+            gl.insertAdjacentHTML('beforeend',
+                this.renderGoodsItem(good.title, good.price));
+        }
+    }
+
+    /* Если посчитать просто сумму всех отрендереных товаров 
+    то нет смысла вводить функцию */
+
+}
+const goodsRender = new GoodsList(goods);

@@ -10,7 +10,12 @@ const goods = [
 const gl = document.querySelector('.goods-list');
 
 const renderGoodsItem = (title, price = 0) => {
-    return `<div class="goods-item"><h3>${title}</h3><p>${price}</p></div>`;
+    return `<div class="goods-item">
+                <img src="http://dummyimage.com/120" alt="" srcset="">
+                <h3>${title}</h3>
+                <p>$${price}</p>
+                <button type="button">Добавить</button>
+            </div>`;
 };
 
 const renderGoodsList = (list) => {
